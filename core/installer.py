@@ -12,6 +12,41 @@ class ModInstaller:
         self.backup_dir.mkdir(parents=True, exist_ok=True)
         self.manifest_dir.mkdir(parents=True, exist_ok=True)
 
+    def check_conflicts(self, payload_root):
+        import json
+        import os
+        from pathlib import Path
+        
+        conflicts = []
+        manifest_dir = Path("data/manifests")
+        
+        if not manifest_dir.exists():
+            return conflicts
+
+        payload_files = set()
+        for root, _, files in os.walk(payload_root):
+            for file in files:
+                full_path = Path(root) / file
+                rel_path = str(full_path.relative_to(payload_root))
+                payload_files.add(rel_path)
+
+        for manifest_file in manifest_dir.glob("*_manifest.json"):
+            mod_name = manifest_file.name.replace("_manifest.json", "")
+            
+            try:
+                with open(manifest_file, "r") as f:
+                    manifest_data = json.load(f)
+                    
+                installed_files = manifest_data.get("files", {})
+                
+                for p_file in payload_files:
+                    if p_file in installed_files:
+                        conflicts.append((p_file, mod_name))
+            except Exception:
+                continue
+                
+        return conflicts
+
     def install_mod(self, mod_name, payload_root):
         payload_path = Path(payload_root)
         manifest = {"mod_name": mod_name, "files": []}
