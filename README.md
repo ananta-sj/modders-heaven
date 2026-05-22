@@ -13,13 +13,13 @@ Instead of manually shuffling files and hoping you don't break your game, Modder
 
 
 ## Installation (For Users)
-1. Download the latest `Modders Heaven.exe` from the [Releases](link_to_releases) page.
+1. Download the latest `Modders Heaven.exe` from the [Releases](https://github.com/ananta-sj/modders-heaven/releases/) page.
 2. Run the application (no installation required).
 
 ## Development Setup
 To run the source code locally:
 ```bash
-git clone [https://github.com/yourusername/Universal-Mod-Installer.git](https://github.com/yourusername/Universal-Mod-Installer.git)
-cd Universal-Mod-Installer
+git clone [https://github.com/ananta-sj/modders-heaven.git](https://github.com/ananta-sj/modders-heaven.git)
+cd modders-heaven
 pip install -r requirements.txt
 python app.py
