@@ -1,0 +1,15 @@
+# Python environment and cache
+__pycache__/
+*.py[cod]
+venv/
+env/
+
+# PyInstaller build files
+build/
+dist/
+*.spec
+
+# Application Data (NEVER commit user data to GitHub)
+temp_extract/
+backups/
+data/manifests/
