@@ -3,7 +3,6 @@ from customtkinter import filedialog
 import threading
 import traceback
 
-# Import your core logic here
 from core.extractor import ModExtractor
 from core.installer import ModInstaller
 from core.rollback import ModRollback
@@ -18,7 +17,7 @@ class ModInstallerGUI(ctk.CTk):
         self.title("Universal Mod Installer - v1.0")
         self.geometry("700x650")
         self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(2, weight=1) # Makes the terminal expand
+        self.grid_rowconfigure(2, weight=1)
         
         # --- TOP FRAME: Inputs ---
         self.input_frame = ctk.CTkFrame(self)
@@ -54,7 +53,6 @@ class ModInstallerGUI(ctk.CTk):
         self.btn_uninstall.grid(row=0, column=1, padx=(10, 0), sticky="ew")
 
         # --- BOTTOM FRAME: CMD Terminal ---
-        # Styled to look like a classic hacker/cmd terminal
         cmd_font = ctk.CTkFont(family="Consolas", size=13)
         self.console = ctk.CTkTextbox(
             self, 
@@ -118,7 +116,6 @@ class ModInstallerGUI(ctk.CTk):
             self.log_message(f"C:\\> SUCCESS: Mod committed. Manifest: {manifest_path}")
             
         except Exception as e:
-            # THIS IS NEW: It will print the exact Python error trace to your UI terminal
             self.log_message(f"\nFATAL EXCEPTION:\n{traceback.format_exc()}")
             
         finally:
@@ -127,7 +124,6 @@ class ModInstallerGUI(ctk.CTk):
             self.btn_install.configure(state="normal")
 
     def start_uninstall(self):
-        # Implementation remains the same, just update the log_messages
         pass
 
 if __name__ == "__main__":

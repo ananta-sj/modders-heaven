@@ -27,18 +27,15 @@ class ModRollback:
             target_file = self.game_dir / rel_path
             
             if file_record["action"] == "added":
-                # The mod added this file, so we safely delete it
                 if target_file.exists():
                     os.remove(target_file)
                     
             elif file_record["action"] == "replaced":
-                # The mod overwrote a vanilla file. Restore the backup!
                 backup_file = mod_backup_dir / rel_path
                 if backup_file.exists():
                     target_file.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(backup_file, target_file)
                     
-        # Clean up the backups and manifest file now that it's uninstalled
         if mod_backup_dir.exists():
             shutil.rmtree(mod_backup_dir)
         os.remove(manifest_path)
